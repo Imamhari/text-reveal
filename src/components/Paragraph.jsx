@@ -1,13 +1,13 @@
 "use client"
 import React, { useEffect, useRef } from 'react'
 import styles from '../app/page.module.css'
-import {useScroll} from 'framer-motion'
+import {useScroll, motion} from 'framer-motion'
 
 function Paragraph({value}) {
   const element = useRef(null)
   const {scrollYProgress} = useScroll({
     target: element,
-    offset: ["start end", "end start"]
+    offset: ["start 0.9", "start 0.25"]
   })
 
   useEffect(() => {
@@ -15,12 +15,13 @@ function Paragraph({value}) {
   }, [])
 
   return (
-    <p 
+    <motion.p 
       className={styles.paragraph}
       ref={element}
+      style={{opacity: scrollYProgress}}
     >
       {value}
-    </p>
+    </motion.p>
   )
 }
 
